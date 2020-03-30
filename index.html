@@ -8,12 +8,19 @@
     <link rel="stylesheet" href="./style/style.css">
 </head>
 <body>
+
+    <img src="./images/hangman_placeholder.png" alt="a hangman placeholder" id="hangman_image">
     
+    
+    <div id="word_characters" class="word_text"></div>
+    <div id="word_definition" class="word_text">Definition:<span id="definition_insertion"></span></div>
 
 
 
 
-
+    <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.10.0/firebase-firestore.js"></script>
+    <script src="./script/firebase_api.js"></script>
     <script src="./script/script.js"></script>
 </body>
 </html>
