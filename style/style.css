@@ -21,3 +21,12 @@
     margin-left: .65em;
 }
 
+.btn_char {
+    color: blue;
+    margin: 4px;
+    font-size: larger;
+    padding: 5px;
+    width: 30px;
+    text-align: center;
+}
+

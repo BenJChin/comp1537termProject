@@ -112,6 +112,22 @@ function character(char) {
     }
 }
 
+/**
+ * Generates and inserts alphabet buttons
+ */
+function generateButtons(){
+    for (i = 0; i < 26; i++){
+        this.btn = document.createElement("BUTTON");
+        this.btn.innerHTML = String.fromCharCode(i + 65);
+        this.btn.classList.add("btn_char");
+        document.body.appendChild(this.btn);
+        this.btn.addEventListener ("click", function(){
+            console.log("Button " + this.innerHTML + " was clicked");
+        })
+        
+    }
+}
+
 
 /**************************
  * 
@@ -119,6 +135,7 @@ function character(char) {
  * 
  **************************/
 
+generateButtons();
 generateRandomWord();
 generateWordBlanks();
 insertWordDefinition();
