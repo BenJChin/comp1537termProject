@@ -56,6 +56,11 @@ let gameWordDefinition;
 //Holds all the character objects that are inserted into the DOM
 let gameWordChars = [];
 
+//Will be used to track if the word is guessed correctly or not.
+let correctGuess = 0;
+
+//Counter used to count the number of wrong guesses.
+let wrongGuess = 0;
 
 /**************************
  * 
@@ -126,6 +131,46 @@ function generateButtons(){
         })
         
     }
+}
+
+
+/**
+ * Used to generate the body of the hangman.
+ * 
+ * if the word hasnt been guessed yet,it adds 1 to the wrongGuess counter to bring up next image.
+ * call after each wrong guess.
+ */
+function generateHangman() {
+    let hangman = document.getElementById("hangman_image");
+
+    if (correctGuess == 0) {
+        wrongGuess++;
+    }
+    if (wrongGuess == 1) {
+        hangman.src = "./images/hangman1.png";
+    }
+    if (wrongGuess == 2) {
+        hangman.src = "./images/hangman2.png";
+    }
+    if (wrongGuess == 3) {
+        hangman.src = "./images/hangman3.png";
+    }
+    if (wrongGuess == 4) {
+        hangman.src = "./images/hangman4.png";
+    }
+    if (wrongGuess == 5) {
+        hangman.src = "./images/hangman5.png";
+    }
+    if (wrongGuess == 6) {
+        hangman.src = "./images/hangman6.png";
+    }
+    if (wrongGuess == 7) {
+        hangman.src = "./images/hangman8.png";
+    }
+    if (correctGuess == 1) {
+        //
+    }
+
 }
 
 
