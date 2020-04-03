@@ -56,11 +56,17 @@ let gameWordDefinition;
 //Holds all the character objects that are inserted into the DOM
 let gameWordChars = [];
 
+//An array to hold the game buttons generated
+let gameButtons = [];
+
 //Will be used to track if the word is guessed correctly or not.
 let correctGuess = 0;
 
 //Counter used to count the number of wrong guesses.
 let wrongGuess = 0;
+
+//Game score
+let score = 0;
 
 /**************************
  * 
@@ -85,7 +91,7 @@ function generateRandomWord() {
 function generateWordBlanks() {
     for (let i = 0; i < gameWord.length; i++) {
         let wordChar = gameWord[i];
-        let charElement = new character(wordChar);
+        let charElement = new Character(wordChar);
         gameWordChars.push(charElement);
     }
 }
@@ -103,18 +109,53 @@ function insertWordDefinition() {
  * user guesses it correctly
  * @param {*} char the char from the gameWord
  */
-function character(char) {
+function Character(char) {
     this.char = char;
+    this.revealed = false;
     this.charEl = document.createElement("p");
     this.charEl.innerHTML = "_";
     this.charEl.classList.add("word_char");
+    
     
     let domInsertion = document.getElementById("word_characters");
     domInsertion.appendChild(this.charEl);
 
     this.reveal = function() {
-        this.charObj.innerHTML = this.char;
+        this.charEl.innerHTML = this.char;
+        this.revealed = true;
     }
+
+}
+
+function Button(i) {
+    this.btn = document.createElement("BUTTON");
+    this.btn.innerHTML = String.fromCharCode(i + 65);
+    this.btn.classList.add("btn_char");
+    document.body.appendChild(this.btn);
+
+   
+
+    this.btn.addEventListener ("click", function(){
+        let buttonChar = this.innerHTML;
+        let buttonCharLower = buttonChar.toLowerCase();
+        let guessedRight = false;
+        console.log(this.classList.add("hidden"));
+
+        gameWordChars.forEach((letter) => {
+            if (buttonCharLower == letter.char) {
+                guessedRight = true;
+                letter.reveal();
+                score++;
+            }
+        });
+
+        if(!guessedRight) {
+            wrongGuess++;
+            score--;
+            generateHangman();
+        }
+
+    });
 }
 
 /**
@@ -122,15 +163,37 @@ function character(char) {
  */
 function generateButtons(){
     for (i = 0; i < 26; i++){
-        this.btn = document.createElement("BUTTON");
-        this.btn.innerHTML = String.fromCharCode(i + 65);
-        this.btn.classList.add("btn_char");
-        document.body.appendChild(this.btn);
-        this.btn.addEventListener ("click", function(){
-            console.log("Button " + this.innerHTML + " was clicked");
-        })
-        
+        let newButton = new Button(i);
+        gameButtons.push(newButton);
+
     }
+}
+
+function checkGameState() {
+    let lettersLeft = [];
+
+    /* Checking if the game is won*/
+    gameWordChars.forEach((letter) => {
+        if (!letter.revealed) {
+            lettersLeft.push(letter);
+        }
+    });
+
+    /* Checking if the game is won*/
+    if (lettersLeft.length == 0) {
+        gameWin();
+        return;
+    }
+
+    //Checking if the game is lost
+}
+
+function gameWin() {
+
+}
+
+function gameLoss() {
+
 }
 
 
