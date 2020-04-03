@@ -34,3 +34,6 @@
     display: none;
 }
 
+#game_message {
+    text-align: center;
+}

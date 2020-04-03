@@ -127,19 +127,25 @@ function Character(char) {
 
 }
 
+/**
+ * A Button class for the user to click on to make
+ * guesses in the game. The onclick function handles
+ * most of the game logic in checking if that button
+ * matches any letters in the game word.
+ * @param {integer} i 
+ */
 function Button(i) {
     this.btn = document.createElement("BUTTON");
     this.btn.innerHTML = String.fromCharCode(i + 65);
     this.btn.classList.add("btn_char");
     document.body.appendChild(this.btn);
-
-   
+    
 
     this.btn.addEventListener ("click", function(){
         let buttonChar = this.innerHTML;
         let buttonCharLower = buttonChar.toLowerCase();
         let guessedRight = false;
-        console.log(this.classList.add("hidden"));
+        this.classList.add("hidden");
 
         gameWordChars.forEach((letter) => {
             if (buttonCharLower == letter.char) {
@@ -154,6 +160,7 @@ function Button(i) {
             score--;
             generateHangman();
         }
+        checkGameState();
 
     });
 }
@@ -186,14 +193,27 @@ function checkGameState() {
     }
 
     //Checking if the game is lost
+    if (wrongGuess >= 7) {
+        gameLost();
+    }
 }
+
 
 function gameWin() {
+    gameButtons.forEach((button) => {
+        button.btn.classList.add('hidden');
+        //button.classList.add("hidden");
+    })
+    let domInsertion = document.getElementById("game_message");
+    domInsertion.innerHTML = `You win! You got a score of ${score}!`;
+} 
 
-}
-
-function gameLoss() {
-
+function gameLost() {
+    gameButtons.forEach((button) => {
+        button.btn.classList.add('hidden');
+    })
+    let domInsertion = document.getElementById("game_message");
+    domInsertion.innerHTML = `Some people are winners, some people are losers. You're not in the first group. Try again?`;
 }
 
 
@@ -206,9 +226,6 @@ function gameLoss() {
 function generateHangman() {
     let hangman = document.getElementById("hangman_image");
 
-    if (correctGuess == 0) {
-        wrongGuess++;
-    }
     if (wrongGuess == 1) {
         hangman.src = "./images/hangman1.png";
     }
@@ -227,7 +244,7 @@ function generateHangman() {
     if (wrongGuess == 6) {
         hangman.src = "./images/hangman6.png";
     }
-    if (wrongGuess == 7) {
+    if (wrongGuess >= 7) {
         hangman.src = "./images/hangman8.png";
     }
     if (correctGuess == 1) {
