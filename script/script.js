@@ -281,6 +281,7 @@ pushScore.onclick = function recordScore() {
     })
     .then(function (docRef) {
         console.log("Document written with ID: ", playerName);
+        document.getElementById("pushScore").style.visibility = "hidden";
         //window.alert("Successfully sent!");
     })
     .catch(function (error) {
