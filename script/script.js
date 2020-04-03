@@ -1,3 +1,5 @@
+
+
 /**
  * The main word list array. Each word is stored as an object of word and definition.
  * There are 10 words, one of which is the required 'committee'. Feel free to add more!
@@ -56,9 +58,6 @@ let gameWordChars = [];
 
 //An array to hold the game buttons generated
 let gameButtons = [];
-
-//Will be used to track if the word is guessed correctly or not.
-let correctGuess = 0;
 
 //Counter used to count the number of wrong guesses.
 let wrongGuess = 0;
@@ -202,6 +201,7 @@ function checkGameState() {
         return;
     }
 
+
     //Checking if the game is lost
     if (wrongGuess >= 7) {
         gameLost();
@@ -221,6 +221,7 @@ function gameWin() {
     })
     let domInsertion = document.getElementById("game_message");
     domInsertion.innerHTML = `You win! You got a score of ${gameScore}!`;
+    document.getElementById("pushScore").style.visibility = "visible";
 }
 
 /**
@@ -266,17 +267,31 @@ function generateHangman() {
         hangman.src = "./images/hangman6.png";
     }
     if (wrongGuess >= 7) {
-        hangman.src = "./images/hangman8.png";
-    }
-    if (correctGuess == 1) {
-        //
+        hangman.src = "./images/hangman7.png";
     }
 
+}
+//Send to firebase
+let playerName = "";
+pushScore.onclick = function recordScore() {
+    playerName = window.prompt("Please enter your name to be inputted into the leaderboards");
+    db.collection("scores").doc(playerName).set({
+        name: playerName,
+        score: gameScore
+    })
+    .then(function (docRef) {
+        console.log("Document written with ID: ", playerName);
+        //window.alert("Successfully sent!");
+    })
+    .catch(function (error) {
+        console.error("Error adding document: ", error);
+        window.alert("I have no idea waht went wrong, but something did.");
+    });
 }
 
 //Displays score
 function displayScore() {
-    document.getElementById("score").innerHTML = "Score: " + gameScore;
+    document.getElementById("score").innerHTML = "Score: " + gameScore + "<br> Lives: " + (7 - wrongGuess);
 }
 //Sets all elements to original state
 
@@ -292,6 +307,8 @@ reset.onclick = function reset() {
     document.getElementById("word_definition").innerHTML = '';
     document.getElementById("word_characters").textContent = '';
     
+    document.getElementById("pushScore").style.visibility = "hidden";
+
     generateButtons();
     generateRandomWord();
     generateWordBlanks();

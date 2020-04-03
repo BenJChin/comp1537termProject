@@ -14,9 +14,13 @@
 
 <body>
     <div class="container text-center">
-        <h5 id="score">Score: 0</h5>
-        <img src="./images/hangman.png" alt="a hangman placeholder" class="img-fluid" id="hangman_image">
+        <h5 class="d-inline px-3">Lives: 7</h5>
+        <h5 id="score" class="d-inline">Score: 0</h5>
         
+    </div>
+
+    <div class="container text-center">
+        <img src="./images/hangman.png" alt="a hangman placeholder" class="img-fluid" id="hangman_image">
     </div>
     
 
@@ -43,12 +47,21 @@
     
     
     
-    <div id="buttons" class="container">
-        <!--Buttons go here-->
+    <div id="word_characters" class="word_text"></div>
+
+
+    <div class="container">
+        <div id="buttons">
+            <!--Buttons go here-->
+        </div>
     </div>
+    
+
+    
 
     <div class="d-flex justify-content-center">
         <input type="Button" id="reset" value= "Reset">
+        <input type="Button" id="pushScore" value= "Record Score">
     </div>
     
 
