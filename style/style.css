@@ -80,3 +80,7 @@ h5 {
     color: green;
     background-color: rgba(105,105,105, 0.5);
 }
+
+#leader_board_card {
+    visibility: hidden;
+}

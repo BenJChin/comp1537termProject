@@ -221,8 +221,7 @@ function gameWin() {
     let domInsertion = document.getElementById("game_message");
     domInsertion.innerHTML = `You win! You got a score of ${gameScore}!`;
     document.getElementById("pushScore").style.visibility = "visible";
-    //display rank if user win the game.
-    displayRank();
+    
 }
 
 
@@ -287,6 +286,9 @@ pushScore.onclick = function recordScore() {
         document.getElementById("pushScore").style.visibility = "hidden";
         //window.alert("Successfully sent!");
     })
+    .then(function () {
+        displayRank();
+    })
     .catch(function (error) {
         console.error("Error adding document: ", error);
         window.alert("I have no idea waht went wrong, but something did.");
@@ -317,6 +319,7 @@ reset.onclick = function reset() {
     document.getElementById("word_characters").textContent = '';
     
     document.getElementById("pushScore").style.visibility = "hidden";
+    document.getElementById("leader_board_card").style.visibility = "hidden";
 
     generateButtons();
     generateRandomWord();
@@ -338,14 +341,20 @@ function ScoreRank(userName, userScore) {
  * Displays the ranking at the end of the game.
  */
 function displayRank() {
+    let userScoreString = "";
     db.collection("scores").orderBy('score', 'desc').limit(10).get().then(function (querySnapshot) {
         querySnapshot.forEach(function (doc) {
             // doc.data() is never undefined for query doc snapshots
             userData = new ScoreRank(doc.data().name, doc.data().score);
             console.log(userData);
-            let displayScore = document.createElement("h5");
-            displayScore.innerHTML = doc.data().name + "<br>" + doc.data().score;
-            document.body.appendChild(displayScore);
+            let userName = doc.data().name;
+            let userScore = doc.data().score;
+
+            let domInsertion = document.getElementById("leader_board_scores");
+            userScoreString += `${userName} : ${userScore} <br>`;
+            domInsertion.innerHTML = userScoreString;
+            
+            document.getElementById("leader_board_card").style.visibility = "visible";
         })
     })
 }
