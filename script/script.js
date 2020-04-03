@@ -272,7 +272,9 @@ function generateHangman() {
     }
 }
 
-//Send to firebase
+/**
+ * Sends name and data to firebase.
+ */
 pushScore.onclick = function recordScore() {
     let playerName = "";
     playerName = window.prompt("Please enter your name to be inputted into the leaderboards");
@@ -291,12 +293,17 @@ pushScore.onclick = function recordScore() {
     });
 }
 
-//Displays score
+
+/**
+ * Displays the score on screen.
+ */
 function displayScore() {
     document.getElementById("score").innerHTML = "Score: " + gameScore + "<br> Lives: " + (7 - wrongGuess);
 }
 
-//Sets all elements to original state
+/**
+ * Resets all elements to original state.
+ */
 reset.onclick = function reset() {
     wrongGuess = 0;
     gameScore = 0;
@@ -317,23 +324,19 @@ reset.onclick = function reset() {
     insertWordDefinition();
 }
 
-/* Brendon's code
-
-db.collection("scores").orderBy('score', 'desc').limit(10).get().then(function(querySnapshot) {
-    querySnapshot.forEach(function(doc) {
-        console.log(doc.id, " => ", doc.data());
-        
-    });
-});
-*/
-
-//Score rank object constructor.
+/**
+ * ScoreRank object constructor
+ * @param {*} userName 
+ * @param {*} userScore 
+ */
 function ScoreRank(userName, userScore) {
     this.userName = userName;
     this.userScore = userScore;
 }
 
-//display rank.
+/**
+ * Displays the ranking at the end of the game.
+ */
 function displayRank() {
     db.collection("scores").orderBy('score', 'desc').limit(10).get().then(function (querySnapshot) {
         querySnapshot.forEach(function (doc) {
