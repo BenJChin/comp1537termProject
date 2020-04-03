@@ -346,10 +346,8 @@ function displayRank() {
         querySnapshot.forEach(function (doc) {
             // doc.data() is never undefined for query doc snapshots
             userData = new ScoreRank(doc.data().name, doc.data().score);
-            console.log(userData);
             let userName = doc.data().name;
             let userScore = doc.data().score;
-
             let domInsertion = document.getElementById("leader_board_scores");
             userScoreString += `${userName} : ${userScore} <br>`;
             domInsertion.innerHTML = userScoreString;
