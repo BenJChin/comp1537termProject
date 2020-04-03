@@ -6,43 +6,43 @@
  */
 const wordList = [{
         word: 'zephyr',
-        definition: 'Definition: a soft gentle breeze'
+        definition: 'Definition: A soft gentle breeze'
     },
     {
         word: 'buzzword',
-        definition: 'Definition: a word or phrase that is fashionable at a particular time or context'
+        definition: 'Definition: A word or phrase that is fashionable at a particular time or context'
     },
     {
         word: 'committee',
-        definition: 'Definition: a group of people appointed for a specific function'
+        definition: 'Definition: A group of people appointed for a specific function'
     },
     {
         word: 'embezzle',
-        definition: 'Definition: steal or misappropriate'
+        definition: 'Definition: To steal or misappropriate'
     },
     {
         word: 'kitsch',
-        definition: 'Definition: considered to be in poor taste but appreciated in an ironic or knowing way'
+        definition: 'Definition: Considered to be in poor taste but appreciated in an ironic or knowing way'
     },
     {
         word: 'transgress',
-        definition: 'Definition: to infringe or go beyond the bounds of'
+        definition: 'Definition: To infringe or go beyond the bounds of'
     },
     {
         word: 'pizazz',
-        definition: 'Definition: an attractive combination of vitality and glamour'
+        definition: 'Definition: An attractive combination of vitality and glamour'
     },
     {
         word: 'haphazard',
-        definition: 'Definition: lacking any obvious principle of organization'
+        definition: 'Definition: Lacking any obvious principle of organization'
     },
     {
         word: 'quorum',
-        definition: 'Definition: the number of members of a body that when assembled is legally competent to transact business'
+        definition: 'Definition: The number of members of a body that when assembled is legally competent to transact business'
     },
     {
         word: 'Lesotho',
-        definition: 'Definition: a small sovereign nation within the country of South Africa'
+        definition: 'Definition: A small sovereign nation within the country of South Africa'
     }
 ]
 
@@ -70,8 +70,6 @@ let gameScore = 0;
  * FUNCTION DECLARATIONS
  * 
  **************************/
-
-
 
 /* Randomly generates a word and sets the gameWord
  * and gameWordDefinition to that word. 
@@ -121,7 +119,6 @@ function Character(char) {
         this.charEl.innerHTML = this.char;
         this.revealed = true;
     }
-
 }
 
 /**
@@ -137,7 +134,6 @@ function Button(i) {
     this.btn.classList.add("btn_char");
     document.getElementById("buttons").appendChild(this.btn);
     this.btn.active = true;
-
 
     this.btn.addEventListener("click", function () {
         let buttonChar = this.innerHTML;
@@ -238,7 +234,6 @@ function gameLost() {
     domInsertion.innerHTML = `Some people are winners, some people are losers. You're not in the first group. Try again?`;
 }
 
-
 /**
  * Used to generate the body of the hangman.
  * 
@@ -269,11 +264,11 @@ function generateHangman() {
     if (wrongGuess >= 7) {
         hangman.src = "./images/hangman7.png";
     }
-
 }
+
 //Send to firebase
-let playerName = "";
 pushScore.onclick = function recordScore() {
+    let playerName = "";
     playerName = window.prompt("Please enter your name to be inputted into the leaderboards");
     db.collection("scores").doc(playerName).set({
         name: playerName,
@@ -281,6 +276,7 @@ pushScore.onclick = function recordScore() {
     })
     .then(function (docRef) {
         console.log("Document written with ID: ", playerName);
+        document.getElementById("pushScore").style.visibility = "hidden";
         //window.alert("Successfully sent!");
     })
     .catch(function (error) {
@@ -293,8 +289,8 @@ pushScore.onclick = function recordScore() {
 function displayScore() {
     document.getElementById("score").innerHTML = "Score: " + gameScore + "<br> Lives: " + (7 - wrongGuess);
 }
-//Sets all elements to original state
 
+//Sets all elements to original state
 reset.onclick = function reset() {
     wrongGuess = 0;
     gameScore = 0;
@@ -322,10 +318,6 @@ db.collection("scores").orderBy('score', 'desc').limit(10).get().then(function(q
         
     });
 });
-
-
-
-
 
 /**************************
  * 
