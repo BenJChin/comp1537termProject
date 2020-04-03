@@ -173,7 +173,8 @@ function Button(i) {
 }
 
 /**
- * Generates and inserts alphabet buttons
+ * Generates and inserts alphabet buttons for the
+ * user to click to play.
  */
 function generateButtons(){
     for (i = 0; i < 26; i++){
@@ -183,6 +184,12 @@ function generateButtons(){
     }
 }
 
+/**
+ * Checks the game state, whether the user
+ * has won or lost yet. Counts the number
+ * of unrevealed letters. If there are 0 unrevealed
+ * letters, then the game is considered won.
+ */
 function checkGameState() {
     let lettersLeft = [];
 
@@ -205,7 +212,12 @@ function checkGameState() {
     }
 }
 
-
+/**
+ * Called when the game is won. Hides all buttons
+ * and displays a message to user. Should create a 
+ * REPLAY GAME button. Should also call a resetGame() function
+ * to wipe the game state and recreate the board and game.
+ */
 function gameWin() {
     gameButtons.forEach((button) => {
         button.btn.classList.add('hidden');
@@ -215,6 +227,12 @@ function gameWin() {
     domInsertion.innerHTML = `You win! You got a score of ${score}!`;
 } 
 
+/**
+ * Called when the game is lost. Hides all buttons
+ * and displays a message to user. Should create a 
+ * REPLAY GAME button. Should also call a resetGame() function
+ * to wipe the game state and recreate the board and game.
+ */
 function gameLost() {
     gameButtons.forEach((button) => {
         button.btn.classList.add('hidden');
@@ -264,6 +282,9 @@ function generateHangman() {
 /**************************
  * 
  * MAIN AREA TO CALL FUNCTIONS
+ * 
+ * Should probably put these functions into a "startGame()" function
+ * that we can call at first and then call with the Replay Game button too.
  * 
  **************************/
 
