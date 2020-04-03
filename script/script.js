@@ -139,28 +139,35 @@ function Button(i) {
     this.btn.innerHTML = String.fromCharCode(i + 65);
     this.btn.classList.add("btn_char");
     document.body.appendChild(this.btn);
+    this.btn.active = true;
     
 
     this.btn.addEventListener ("click", function(){
         let buttonChar = this.innerHTML;
         let buttonCharLower = buttonChar.toLowerCase();
         let guessedRight = false;
-        this.classList.add("hidden");
 
-        gameWordChars.forEach((letter) => {
-            if (buttonCharLower == letter.char) {
-                guessedRight = true;
-                letter.reveal();
-                score++;
+        if (this.active) {
+            this.active = false;
+            gameWordChars.forEach((letter) => {
+                if (buttonCharLower == letter.char) {
+                    guessedRight = true;
+                    letter.reveal();
+                    this.classList.add('right_guess_button');
+                    score++;
+                }
+            });
+
+            if(!guessedRight) {
+                wrongGuess++;
+                score--;
+                this.classList.add('wrong_guess_button');
+                generateHangman();
             }
-        });
-
-        if(!guessedRight) {
-            wrongGuess++;
-            score--;
-            generateHangman();
+            
+            checkGameState();
         }
-        checkGameState();
+        
 
     });
 }
