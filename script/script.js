@@ -6,43 +6,43 @@
  */
 const wordList = [{
         word: 'zephyr',
-        definition: 'Definition: a soft gentle breeze'
+        definition: 'Definition: A soft gentle breeze'
     },
     {
         word: 'buzzword',
-        definition: 'Definition: a word or phrase that is fashionable at a particular time or context'
+        definition: 'Definition: A word or phrase that is fashionable at a particular time or context'
     },
     {
         word: 'committee',
-        definition: 'Definition: a group of people appointed for a specific function'
+        definition: 'Definition: A group of people appointed for a specific function'
     },
     {
         word: 'embezzle',
-        definition: 'Definition: steal or misappropriate'
+        definition: 'Definition: To steal or misappropriate'
     },
     {
         word: 'kitsch',
-        definition: 'Definition: considered to be in poor taste but appreciated in an ironic or knowing way'
+        definition: 'Definition: Considered to be in poor taste but appreciated in an ironic or knowing way'
     },
     {
         word: 'transgress',
-        definition: 'Definition: to infringe or go beyond the bounds of'
+        definition: 'Definition: To infringe or go beyond the bounds of'
     },
     {
         word: 'pizazz',
-        definition: 'Definition: an attractive combination of vitality and glamour'
+        definition: 'Definition: An attractive combination of vitality and glamour'
     },
     {
         word: 'haphazard',
-        definition: 'Definition: lacking any obvious principle of organization'
+        definition: 'Definition: Lacking any obvious principle of organization'
     },
     {
         word: 'quorum',
-        definition: 'Definition: the number of members of a body that when assembled is legally competent to transact business'
+        definition: 'Definition: The number of members of a body that when assembled is legally competent to transact business'
     },
     {
         word: 'Lesotho',
-        definition: 'Definition: a small sovereign nation within the country of South Africa'
+        definition: 'Definition: A small sovereign nation within the country of South Africa'
     }
 ]
 
