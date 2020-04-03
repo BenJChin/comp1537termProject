@@ -297,7 +297,7 @@ pushScore.onclick = function recordScore() {
 
 //Displays score
 function displayScore() {
-    document.getElementById("score").innerHTML = "Score: " + gameScore;
+    document.getElementById("score").innerHTML = "Score: " + gameScore + "<br> Lives: " + (7 - wrongGuess);
 }
 //Sets all elements to original state
 
