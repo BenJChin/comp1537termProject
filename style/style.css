@@ -1,12 +1,12 @@
 
+
 #hangman_image {
-    width: 20%;
-    height: 20%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+    width: 40%;
+    height: 40%;
 }
 
+
+/*
 #score {
     position: absolute;
     top: 5%;
@@ -21,32 +21,39 @@
     height: 10%;
     font-size: 200%;
 }
+*/
 
 .word_text {
     text-align: center;
     font-size: 1em;
-    padding-top: 3em;
+    
 }
 
 #word_characters {
-    font-size: 2em;
-    padding-top: 2em;
+    font-size: 1.5em;
+    
+}
+
+#word_definition {
+    font-size: .95em;
 }
 
 .word_char {
     display: inline-block;
-    margin-left: .65em;
+    margin-left: .70em;
 }
 
 .btn_char {
     color: blue;
     margin: 4px;
-    font-size: larger;
     padding: 5px;
-    width: 30px;
+    width: 1.75em;
     text-align: center;
 }
 
+.card {
+    background-color: #F0F0F0;
+}
 .hidden {
     display: none;
 }
