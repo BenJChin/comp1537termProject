@@ -316,6 +316,16 @@ reset.onclick = function reset() {
 }
 
 
+db.collection("scores").orderBy('score', 'desc').limit(10).get().then(function(querySnapshot) {
+    querySnapshot.forEach(function(doc) {
+        console.log(doc.id, " => ", doc.data());
+        
+    });
+});
+
+
+
+
 
 /**************************
  * 
