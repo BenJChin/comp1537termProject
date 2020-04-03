@@ -49,11 +49,11 @@
 }
 
 .btn_char {
-    color: blue;
     margin: 4px;
     padding: 5px;
     width: 10vw;
     text-align: center;
+    
 }
 
 .card {
@@ -70,8 +70,10 @@
 
 .wrong_guess_button {
     color: red;
+    background-color: rgba(105,105,105, 0.5);
 }
 
 .right_guess_button {
     color: green;
+    background-color: rgba(105,105,105, 0.5);
 }
