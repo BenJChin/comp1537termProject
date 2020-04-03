@@ -1,10 +1,8 @@
-
 /**
  * The main word list array. Each word is stored as an object of word and definition.
  * There are 10 words, one of which is the required 'committee'. Feel free to add more!
  */
-const wordList = [
-    {
+const wordList = [{
         word: 'zephyr',
         definition: 'Definition: a soft gentle breeze'
     },
@@ -115,12 +113,12 @@ function Character(char) {
     this.charEl = document.createElement("p");
     this.charEl.innerHTML = "_";
     this.charEl.classList.add("word_char");
-    
-    
+
+
     let domInsertion = document.getElementById("word_characters");
     domInsertion.appendChild(this.charEl);
 
-    this.reveal = function() {
+    this.reveal = function () {
         this.charEl.innerHTML = this.char;
         this.revealed = true;
     }
@@ -138,11 +136,11 @@ function Button(i) {
     this.btn = document.createElement("BUTTON");
     this.btn.innerHTML = String.fromCharCode(i + 65);
     this.btn.classList.add("btn_char");
-    document.body.appendChild(this.btn);
+    document.getElementById("buttons").appendChild(this.btn);
     this.btn.active = true;
-    
 
-    this.btn.addEventListener ("click", function(){
+
+    this.btn.addEventListener("click", function () {
         let buttonChar = this.innerHTML;
         let buttonCharLower = buttonChar.toLowerCase();
         let guessedRight = false;
@@ -158,17 +156,16 @@ function Button(i) {
                 }
             });
 
-            if(!guessedRight) {
+            if (!guessedRight) {
                 wrongGuess++;
                 gameScore--;
                 this.classList.add('wrong_guess_button');
                 generateHangman();
             }
-            
+
             checkGameState();
         }
-        
-
+        displayScore();
     });
 }
 
@@ -176,8 +173,8 @@ function Button(i) {
  * Generates and inserts alphabet buttons for the
  * user to click to play.
  */
-function generateButtons(){
-    for (i = 0; i < 26; i++){
+function generateButtons() {
+    for (i = 0; i < 26; i++) {
         let newButton = new Button(i);
         gameButtons.push(newButton);
     }
@@ -224,7 +221,7 @@ function gameWin() {
     })
     let domInsertion = document.getElementById("game_message");
     domInsertion.innerHTML = `You win! You got a score of ${gameScore}!`;
-} 
+}
 
 /**
  * Called when the game is lost. Hides all buttons
@@ -276,6 +273,31 @@ function generateHangman() {
     }
 
 }
+
+//Displays score
+function displayScore() {
+    document.getElementById("score").innerHTML = "Score: " + gameScore;
+}
+//Sets all elements to original state
+
+reset.onclick = function reset() {
+    wrongGuess = 0;
+    gameScore = 0;
+    gameWordChars = [];
+    document.getElementById("hangman_image").src = "./images/hangman.png";
+    displayScore();
+    document.getElementById("buttons").innerHTML = '';
+    document.getElementById("game_message").innerHTML = '';
+    
+    document.getElementById("word_definition").innerHTML = '';
+    document.getElementById("word_characters").textContent = '';
+    
+    generateButtons();
+    generateRandomWord();
+    generateWordBlanks();
+    insertWordDefinition();
+}
+
 
 
 /**************************

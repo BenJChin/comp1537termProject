@@ -1,9 +1,25 @@
 
 #hangman_image {
-    width: 30%;
+    width: 20%;
+    height: 20%;
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+
+#score {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+}
+
+#reset {
+    position: absolute;
+    top: 5%;
+    right: 20%;
+    width: 10%;
+    height: 10%;
+    font-size: 200%;
 }
 
 .word_text {
