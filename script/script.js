@@ -59,9 +59,6 @@ let gameWordChars = [];
 //An array to hold the game buttons generated
 let gameButtons = [];
 
-//Will be used to track if the word is guessed correctly or not.
-let correctGuess = 0;
-
 //Counter used to count the number of wrong guesses.
 let wrongGuess = 0;
 
@@ -271,9 +268,6 @@ function generateHangman() {
     }
     if (wrongGuess >= 7) {
         hangman.src = "./images/hangman8.png";
-    }
-    if (correctGuess == 1) {
-        //
     }
 
 }
