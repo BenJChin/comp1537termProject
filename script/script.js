@@ -66,7 +66,7 @@ let correctGuess = 0;
 let wrongGuess = 0;
 
 //Game score
-let score = 0;
+let gameScore = 0;
 
 /**************************
  * 
@@ -139,34 +139,42 @@ function Button(i) {
     this.btn.innerHTML = String.fromCharCode(i + 65);
     this.btn.classList.add("btn_char");
     document.body.appendChild(this.btn);
+    this.btn.active = true;
     
 
     this.btn.addEventListener ("click", function(){
         let buttonChar = this.innerHTML;
         let buttonCharLower = buttonChar.toLowerCase();
         let guessedRight = false;
-        this.classList.add("hidden");
 
-        gameWordChars.forEach((letter) => {
-            if (buttonCharLower == letter.char) {
-                guessedRight = true;
-                letter.reveal();
-                score++;
+        if (this.active) {
+            this.active = false;
+            gameWordChars.forEach((letter) => {
+                if (buttonCharLower == letter.char) {
+                    guessedRight = true;
+                    letter.reveal();
+                    this.classList.add('right_guess_button');
+                    gameScore++;
+                }
+            });
+
+            if(!guessedRight) {
+                wrongGuess++;
+                gameScore--;
+                this.classList.add('wrong_guess_button');
+                generateHangman();
             }
-        });
-
-        if(!guessedRight) {
-            wrongGuess++;
-            score--;
-            generateHangman();
+            
+            checkGameState();
         }
-        checkGameState();
+        
 
     });
 }
 
 /**
- * Generates and inserts alphabet buttons
+ * Generates and inserts alphabet buttons for the
+ * user to click to play.
  */
 function generateButtons(){
     for (i = 0; i < 26; i++){
@@ -175,6 +183,12 @@ function generateButtons(){
     }
 }
 
+/**
+ * Checks the game state, whether the user
+ * has won or lost yet. Counts the number
+ * of unrevealed letters. If there are 0 unrevealed
+ * letters, then the game is considered won.
+ */
 function checkGameState() {
     let lettersLeft = [];
 
@@ -197,16 +211,27 @@ function checkGameState() {
     }
 }
 
-
+/**
+ * Called when the game is won. Hides all buttons
+ * and displays a message to user. Should create a 
+ * REPLAY GAME button. Should also call a resetGame() function
+ * to wipe the game state and recreate the board and game.
+ */
 function gameWin() {
     gameButtons.forEach((button) => {
         button.btn.classList.add('hidden');
         //button.classList.add("hidden");
     })
     let domInsertion = document.getElementById("game_message");
-    domInsertion.innerHTML = `You win! You got a score of ${score}!`;
+    domInsertion.innerHTML = `You win! You got a score of ${gameScore}!`;
 } 
 
+/**
+ * Called when the game is lost. Hides all buttons
+ * and displays a message to user. Should create a 
+ * REPLAY GAME button. Should also call a resetGame() function
+ * to wipe the game state and recreate the board and game.
+ */
 function gameLost() {
     gameButtons.forEach((button) => {
         button.btn.classList.add('hidden');
@@ -256,6 +281,9 @@ function generateHangman() {
 /**************************
  * 
  * MAIN AREA TO CALL FUNCTIONS
+ * 
+ * Should probably put these functions into a "startGame()" function
+ * that we can call at first and then call with the Replay Game button too.
  * 
  **************************/
 

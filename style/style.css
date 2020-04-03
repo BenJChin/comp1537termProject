@@ -39,3 +39,11 @@
     text-align: center;
     position: relative;
 }
+
+.wrong_guess_button {
+    color: red;
+}
+
+.right_guess_button {
+    color: green;
+}
