@@ -1,3 +1,5 @@
+
+
 /**
  * The main word list array. Each word is stored as an object of word and definition.
  * There are 10 words, one of which is the required 'committee'. Feel free to add more!
@@ -202,6 +204,7 @@ function checkGameState() {
         return;
     }
 
+
     //Checking if the game is lost
     if (wrongGuess >= 7) {
         gameLost();
@@ -221,6 +224,7 @@ function gameWin() {
     })
     let domInsertion = document.getElementById("game_message");
     domInsertion.innerHTML = `You win! You got a score of ${gameScore}!`;
+    document.getElementById("pushScore").style.visibility = "visible";
 }
 
 /**
@@ -273,6 +277,23 @@ function generateHangman() {
     }
 
 }
+//Send to firebase
+let playerName = "";
+pushScore.onclick = function recordScore() {
+    playerName = window.prompt("Please enter your name to be inputted into the leaderboards");
+    db.collection("scores").doc(playerName).set({
+        name: playerName,
+        score: gameScore
+    })
+    .then(function (docRef) {
+        console.log("Document written with ID: ", playerName);
+        //window.alert("Successfully sent!");
+    })
+    .catch(function (error) {
+        console.error("Error adding document: ", error);
+        window.alert("I have no idea waht went wrong, but something did.");
+    });
+}
 
 //Displays score
 function displayScore() {
@@ -292,6 +313,8 @@ reset.onclick = function reset() {
     document.getElementById("word_definition").innerHTML = '';
     document.getElementById("word_characters").textContent = '';
     
+    document.getElementById("pushScore").style.visibility = "hidden";
+
     generateButtons();
     generateRandomWord();
     generateWordBlanks();
