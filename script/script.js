@@ -267,7 +267,7 @@ function generateHangman() {
         hangman.src = "./images/hangman6.png";
     }
     if (wrongGuess >= 7) {
-        hangman.src = "./images/hangman8.png";
+        hangman.src = "./images/hangman7.png";
     }
 
 }
