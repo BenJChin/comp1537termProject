@@ -65,6 +65,9 @@ let wrongGuess = 0;
 //Game score
 let gameScore = 0;
 
+//user rank from firebase.
+let userData;
+
 /**************************
  * 
  * FUNCTION DECLARATIONS
@@ -218,7 +221,10 @@ function gameWin() {
     let domInsertion = document.getElementById("game_message");
     domInsertion.innerHTML = `You win! You got a score of ${gameScore}!`;
     document.getElementById("pushScore").style.visibility = "visible";
+    //display rank if user win the game.
+    displayRank();
 }
+
 
 /**
  * Called when the game is lost. Hides all buttons
@@ -311,6 +317,7 @@ reset.onclick = function reset() {
     insertWordDefinition();
 }
 
+/* Brendon's code
 
 db.collection("scores").orderBy('score', 'desc').limit(10).get().then(function(querySnapshot) {
     querySnapshot.forEach(function(doc) {
@@ -318,6 +325,32 @@ db.collection("scores").orderBy('score', 'desc').limit(10).get().then(function(q
         
     });
 });
+*/
+
+//Score rank object constructor.
+function ScoreRank(userName, userScore) {
+    this.userName = userName;
+    this.userScore = userScore;
+}
+
+//display rank.
+function displayRank() {
+    db.collection("scores").orderBy('score', 'desc').limit(10).get().then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+            // doc.data() is never undefined for query doc snapshots
+            userData = new ScoreRank(doc.data().name, doc.data().score);
+            console.log(userData);
+            let displayScore = document.createElement("h5");
+            displayScore.innerHTML = doc.data().name + "<br>" + doc.data().score;
+            document.body.appendChild(displayScore);
+        })
+    })
+}
+
+
+
+
+
 
 /**************************
  * 

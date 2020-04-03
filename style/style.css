@@ -27,6 +27,9 @@
     visibility: hidden;
 }
 
+h5 {
+    margin-left: 10%;
+}
 
 .word_text {
     text-align: center;
