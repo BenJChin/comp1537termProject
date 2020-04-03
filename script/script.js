@@ -71,8 +71,6 @@ let gameScore = 0;
  * 
  **************************/
 
-
-
 /* Randomly generates a word and sets the gameWord
  * and gameWordDefinition to that word. 
  */
@@ -121,7 +119,6 @@ function Character(char) {
         this.charEl.innerHTML = this.char;
         this.revealed = true;
     }
-
 }
 
 /**
@@ -137,7 +134,6 @@ function Button(i) {
     this.btn.classList.add("btn_char");
     document.getElementById("buttons").appendChild(this.btn);
     this.btn.active = true;
-
 
     this.btn.addEventListener("click", function () {
         let buttonChar = this.innerHTML;
@@ -238,7 +234,6 @@ function gameLost() {
     domInsertion.innerHTML = `Some people are winners, some people are losers. You're not in the first group. Try again?`;
 }
 
-
 /**
  * Used to generate the body of the hangman.
  * 
@@ -269,11 +264,11 @@ function generateHangman() {
     if (wrongGuess >= 7) {
         hangman.src = "./images/hangman7.png";
     }
-
 }
+
 //Send to firebase
-let playerName = "";
 pushScore.onclick = function recordScore() {
+    let playerName = "";
     playerName = window.prompt("Please enter your name to be inputted into the leaderboards");
     db.collection("scores").doc(playerName).set({
         name: playerName,
@@ -294,8 +289,8 @@ pushScore.onclick = function recordScore() {
 function displayScore() {
     document.getElementById("score").innerHTML = "Score: " + gameScore + "<br> Lives: " + (7 - wrongGuess);
 }
-//Sets all elements to original state
 
+//Sets all elements to original state
 reset.onclick = function reset() {
     wrongGuess = 0;
     gameScore = 0;
@@ -315,8 +310,6 @@ reset.onclick = function reset() {
     generateWordBlanks();
     insertWordDefinition();
 }
-
-
 
 /**************************
  * 
