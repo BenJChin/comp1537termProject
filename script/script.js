@@ -172,7 +172,6 @@ function generateButtons(){
     for (i = 0; i < 26; i++){
         let newButton = new Button(i);
         gameButtons.push(newButton);
-
     }
 }
 

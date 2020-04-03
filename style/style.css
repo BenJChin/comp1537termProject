@@ -1,3 +1,4 @@
+
 #hangman_image {
     width: 30%;
     display: block;
@@ -36,4 +37,5 @@
 
 #game_message {
     text-align: center;
+    position: relative;
 }
