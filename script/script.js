@@ -66,7 +66,7 @@ let correctGuess = 0;
 let wrongGuess = 0;
 
 //Game score
-let score = 0;
+let gameScore = 0;
 
 /**************************
  * 
@@ -154,13 +154,13 @@ function Button(i) {
                     guessedRight = true;
                     letter.reveal();
                     this.classList.add('right_guess_button');
-                    score++;
+                    gameScore++;
                 }
             });
 
             if(!guessedRight) {
                 wrongGuess++;
-                score--;
+                gameScore--;
                 this.classList.add('wrong_guess_button');
                 generateHangman();
             }
@@ -224,7 +224,7 @@ function gameWin() {
         //button.classList.add("hidden");
     })
     let domInsertion = document.getElementById("game_message");
-    domInsertion.innerHTML = `You win! You got a score of ${score}!`;
+    domInsertion.innerHTML = `You win! You got a score of ${gameScore}!`;
 } 
 
 /**
